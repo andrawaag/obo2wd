@@ -1,0 +1,56 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX pr: <http://www.wikidata.org/prop/reference/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+start = @<#obo>
+
+# SPARQL example: https://w.wiki/5NZG
+#
+
+<#obo> {
+   rdfs:label xsd:string;
+   p:P1687 @<#P1687_wikidata_property>? ;
+   p:P1830 @<#P1830_short_name> ;
+   p:P275 @<#P275_license>+ ;
+   wdt:P1630 IRI? ;
+}
+
+<#P275_license> {
+   ps:P275 [
+        wd:Q6938433 # CC0
+        wd:Q13785927 # Apache License, Version 2.0
+        wd:Q20007257 # Creative Commons Attribution 4.0 International
+   ] ;
+   prov:wasDerivedFrom @<#obo_reference> ;
+}
+
+<P1630_formatter_url> {
+    ps:P1630_formatter_url IRI;
+}
+
+<#P1687_wikidata_property> {
+   ps:P1687 @<#wikidata_property> ;
+   prov:wasDerivedFrom @<#obo_reference> ;
+
+}
+
+<#P1830_short_name> {
+   ps:P1836 [@mul] // rdfs:label "short name"@en;
+}
+
+<#wikidata_property> {
+   wdt:P31 [wd:Q18614948] ; // rdfs:label "instance of"@en;
+   prov:wasDerivedFrom @<#obo_reference> ;
+}
+
+<#obo_reference> {
+   pr:P248 [] // rdfs:label "stated in"@en;
+   pr:P854 IRI // rdfs:label "reference url"@en ;
+}
+
+
