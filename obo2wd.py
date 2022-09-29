@@ -34,7 +34,6 @@ for ontology in ontologies["ontologies"]:
                             ?item wdt:P2888 <{ontology["license"]["url"]}>  ;
                         }}"""
             results = wdi_core.WDFunctionsEngine.execute_sparql_query(query)
-            print(query)
             licensesQids[ontology["license"]["label"]]["qid"] = results["results"]["bindings"][0]["item"]["value"]
         except:
             print("mismatch")
